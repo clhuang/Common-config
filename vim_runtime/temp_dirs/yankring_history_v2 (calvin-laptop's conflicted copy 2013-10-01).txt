@@ -1,0 +1,100 @@
+import math as mimport osimport shlexfrom collections import namedtupleimport numpy as npimport pycuda.driver as cudafrom ..bifrost import OSC_datafrom ..bifrost import Rhoeetabfrom ..iRenderer import RendererEE = 1.602189e-12HH = 6.626176e-27CC = 2.99792458e10CCA = CC * 1e8HCE = HH / EE * CC * 1e8HC2 = 2 * HH * CC * 1e24MP = 1.67262178e-27KB = 1.3806488e-23TEMAX = 1e5Egi = namedtuple('Egi', ['ev', 'g', 'label', 'ion'])Trn = namedtuple('Trn', ['irad', 'jrad', 'alamb', 'a_ul', 'f', 'qmax', 'q0', 'nq'])KERNELFILE = open(os.path.dirname(os.path.abspath(__file__)) + '/em.cu')CUDACODE = KERNELFILE.read()KERNELFILE.close()class EmissivityCalc(Renderer):    locph = float('nan')    zcutoff = -1.0    #cache emissivity for speed when rendering    level = 0    em = None    def getEmissivities(self, tion, level=None):        if (level == None):            ionln = [i for i,v in enumerate(self.egis) if v.ion == tion]            print('These are the ' + self.elementName + str(tion) + ' lines:')            print('nr\tlvl l\tlvl u\tname lvl l\tname lvl u\twavelength\tEinstein Aij\tion')            print('--------------------------------------------------------------------------------')            for kr in xrange(len(self.trns)):                for ind in ionln:                    t = self.trns[kr]                    if t.jrad == ind or t.irad == ind:                        print(str(kr) + ')\t' + str(t.irad+1) + '\t' + str(t.jrad+1) + '\t' +                                self.egis[t.irad].label + '\t' + self.egis[t.jrad].label + '\t' +                                '%e' % t.alamb + '\t' + '%e' % t.a_ul + '\t' + str(self.egis[t.irad].ion))                        break            level = int(input('Choose a line: '))        tline = self.trns[level]        iondensities = self.oscdata.getooevar(level)        return (HH * CC * 1e-2 / (tline.alamb * 1e-10) * tline.a_ul / (4 * m.pi)) * iondensities    def iRender(self, level, azimuth, altitude, verbose=True):        if level != self.level:            self.em = self.getEmissivities(0, level)            self.level = level        splitTables = [('emtex', self.em)]        tempout = np.empty((self.projectionYsize, self.projectionXsize), dtype='float32')        def ispec_render(self, blocksize, gridsize):            frender = self.mod.get_function('iRender')            frender(cuda.Out(tempout),                    block=(blocksize,1,1), grid=(gridsize,1,1))            ispec_render.datout += tempout        ispec_render.datout = np.zeros_like(tempout)        self.render(azimuth, altitude, [], [], splitTables, ispec_render, verbose)        return ispec_render.datout    def ilRender(self, level, azimuth, altitude, nlamb=121, verbose=True):        if level != self.level:            self.em = self.getEmissivities(0, level)            self.level = level        ny0 = CCA / self.trns[level].alamb        dopp_width0 = ny0 / (CC / 1e2) * m.sqrt(2 * KB / self.awgt / MP)        dny = doppWidthRange * 1.0 / nlamb * dopp_width0 * m.sqrt(TEMAX)        if dnus == None:            dnus = np.empty(nlamb, dtype='float32')            for i in range(nlamb):                dnus[i] = (i - (nlamb - 1) / 2) * dny        else:            dnus = np.array(dnus, dtype='float32')        tables = [('tgtex', self.tgTable)]        splitTables = [('emtex', self.em),                ('uztex', self.uz),                ('uytex', self.uy),                ('uxtex', self.ux),                ('eetex', self.e),                ('dtex', self.r)]        tempout = np.empty((self.projectionYsize, self.projectionXsize, nlamb), dtype='float32')        def ilspec_render(self, blocksize, gridsize):            frender = self.mod.get_function('ilRender')            frender(cuda.Out(tempout), cuda.In(dnus),                    np.float32(ny0), np.float32(dopp_width0),                    np.int32(nlamb),                    block=(blocksize,1,1), grid=(gridsize,1,1))            ilspec_render.datout += tempout        ilspec_render.datout = np.zeros_like(tempout)        self.render(azimuth, altitude, [], tables, splitTables, ilspec_render, verbose)        return (ilspec_render.datout, dnus)    def updateAxes(self, zcut):        self.zcutoff = zcut        xaxis = self.oscdata.getvar('x').astype('float32')        yaxis = self.oscdata.getvar('y').astype('float32')        zaxis = self.oscdata.getvar('z').astype('float32')        for i in range(len(zaxis)):            if zaxis[i] > zcut:                self.locph = i                break        zaxis = zaxis[:self.locph]        self.setAxes(xaxis, yaxis, zaxis)    def setSnap(self, snap):        self.oscdata = OSC_data(snap, self.template, fdir=self.datLoc)        if (self.locph != self.locph):            self.updateAxes(self.zcutoff)        self.ux = self.oscdata.getvar('ux')[...,:self.locph]        self.uy = self.oscdata.getvar('uy')[...,:self.locph]        self.uz = self.oscdata.getvar('uz')[...,:self.locph]        self.e = self.oscdata.getvar('e')[...,:self.locph]        self.r = self.oscdata.getvar('r')[...,:self.locph]    def __init__(self,            datLoc=os.path.expanduser('~') + '/LockheedData/oxygen',            paramFile='oxygen-II-VII-iris',            template='cb24bi_', snap=394):        Renderer.__init__(self, CUDACODE)        self.template = template + '%03i'        self.datLoc = datLoc        #rhoeetab = Rhoeetab(fdir=datLoc)        #self.tgTable = rhoeetab.get_table('tg')        #self.nrhobin = rhoeetab.params['nrhobin']        #self.dmin = m.log(rhoeetab.params['rhomin'])        #self.drange = m.log(rhoeetab.params['rhomax']) - self.dmin        #self.neibin = rhoeetab.params['neibin']        #self.emin = m.log(rhoeetab.params['eimin'])        #self.erange = m.log(rhoeetab.params['eimax']) - self.emin        self.setSnap(394)        irisfile = open(datLoc + '/' + paramFile)        data = [line for line in irisfile.readlines() if line[0] != '*']        self.elementName = data.pop(0).strip()        self.ab, self.awgt = (float(i) for i in data.pop(0).split())        nk, nlines, ncont, nrfix = (int(i) for i in data.pop(0).split())        nrad = nlines + ncont        self.egis = []  #array of (ev, g, ion)        self.trns = []        emissivities = []        for _ in xrange(nk):            datstring = shlex.split(data.pop(0))            ev = float(datstring[0]) * CC * HH / EE            g = float(datstring[1])            label = datstring[2]            ion = int(datstring[3])            self.egis.append(Egi(ev, g, label, ion))        for nline in xrange(nlines):            j, i, f, nq, qmax, q0, io, ga, gw, gq = (                    float(i) for i in data.pop(0).split())            j = int(j)            i = int(i)            nq = int(nq)            io = int(io)            dn = i; up = j            if self.egis[j-1].ev < self.egis[i-1].ev:                dn = j; up = i            irad = dn - 1            jrad = up - 1            alamb = HCE / (self.egis[jrad].ev - self.egis[irad].ev)            a_ul = f * 6.6702e15 * self.egis[irad].g / (self.egis[jrad].g * alamb**2)            self.trns.append(Trn(irad, jrad, alamb, a_ul, f, qmax, q0, nq)),V
+1,v
+ax8817,v
+,V
+\subsection{,V
+\subsection{Emission Rendering},V
+ ,v
+a=numpy.array([((1,2,3),((10,11,12,13,14,15,16,17,18,19),3.14)),...                ((4,5,6),((-1,-2,-3,-4,-5,-6,-7,-8,-9,-20),6.28))],dt),v
+book,v
+    float3 tnear, tfar;,V
+    tnear.x = (((viewVector.x >= 0) ? xpmin : xpmax) - rayOrigin.x) / viewVector.x;    tnear.y = (((viewVector.y >= 0) ? ymin : ymax) - rayOrigin.y) / viewVector.y;    tnear.z = (((viewVector.z >= 0) ? zmin : zmax) - rayOrigin.z) / viewVector.z;    tfar.x = (((viewVector.x < 0) ? xpmin : xpmax) - rayOrigin.x) / viewVector.x;    tfar.y = (((viewVector.y < 0) ? ymin : ymax) - rayOrigin.y) / viewVector.y;    tfar.z = (((viewVector.z < 0) ? zmin : zmax) - rayOrigin.z) / viewVector.z;,V
+    tnear.x = (((viewVector.x >= 0) ? xpmin : xpmax) - rayOrigin.x) / viewVector.x;    tnear.y = (((viewVector.y >= 0) ? ymin : ymax) - rayOrigin.y) / viewVector.y;    tnear.z = (((viewVector.z >= 0) ? zmin : zmax) - rayOrigin.z) / viewVector.z;    tfar.x = (((viewVector.x < 0) ? xpmin : xpmax) - rayOrigin.x) / viewVector.x;    tfar.y = (((viewVector.y < 0) ? ymin : ymax) - rayOrigin.y) / viewVector.y;    tfar.z = (((viewVector.z < 0) ? zmin : zmax) - rayOrigin.z) / viewVector.z;,V
+    if (tfar.z < tf) tf = tfar.z;,V
+    if (tfar.y < tf) tf = tfar.y;,V
+tfar.x;,v
+    if (tnear.z > tn) tn = tnear.z;,V
+    if (tnear.y > tn) tn = tnear.y;,V
+tnear.x;,v
+/,v
+\,v
+j,v
+p,v
+a,v
+    pages = {43},,V
+    eid = {43},,V
+    adsnote = {Provided by the SAO/NASA Astrophysics Data System},V
+    adsurl = {http://adsabs.harvard.edu/abs/2013ApJ...767...43O},,V
+    doi = {10.1088/0004-637X/767/1/43},,V
+.,v
+H,v
+~,v
+},v
+{,v
+V,v
+Judge12,v
+O,v
+3,v
+4,v
+7,v
+6,v
+J,v
+A,v
+0,v
+2,v
+    keywords = {atomic processes, magnetohydrodynamics: MHD, methods: numerical, Sun: atmosphere, Sun: transition region, techniques: spectroscopic},,V
+,,v
+@ARTICLE{2013ApJ...767...43O,   author = {{Olluri}, K. and {Gudiksen}, B.~V. and {Hansteen}, V.~H.},    title = "{Non-equilibrium Ionization Effects on the Density Line Ratio Diagnostics of O IV}",  journal = {\apj}, keywords = {atomic processes, magnetohydrodynamics: MHD, methods: numerical, Sun: atmosphere, Sun: transition region, techniques: spectroscopic},     year = 2013,    month = apr,   volume = 767,      eid = {43},    pages = {43},      doi = {10.1088/0004-637X/767/1/43},   adsurl = {http://adsabs.harvard.edu/abs/2013ApJ...767...43O},  adsnote = {Provided by the SAO/NASA Astrophysics Data System}},v
+    otherinfo = {<++>},V
+<+key+>,v
+-,v
+again owing to its integral exponential form,v
+again owing to its integral exponential form.,V
+ (due to its integral exponential form),v
+    \Delta\nu_D = \frac{\nu_0}{c}\sqrt{\frac{2kT}{m_A}}is the width of the profile as given by,V
+\end{equation},V
+\begin{equation},V
+$,v
+),v
+zoom,v
+easily allowing,v
+resolution,v
+plainnat,v
+v,v
+plain,v
+\documentclass[ngerman,parskip=half]{scrreprt}\usepackage{babel}\usepackage[utf8]{inputenc}\usepackage[sort,nonamebreak, sectionbib,square]{natbib}\usepackage[dvips,dvipdfm,colorlinks=true,urlcolor=blue,citecolor=red,linkcolor=red,bookmarks=true]{hyperref}\usepackage{filecontents}\begin{filecontents}{book.bib} @book{test,author={Jon Doe},title={Who is John Doe},year={2009},}\end{filecontents}\begin{document}\cite{test}\citep{test}\citet{test}\bibliographystyle{natdin}\bibliography{book}\end{document},v
+\documentclass{article}\usepackage{natbib}\begin{document}\citeauthor{lamport94}\citet{lamport94}\begin{thebibliography}{9}    \bibitem[Lamport (1994)]{lamport94}Leslie Lamport,   \emph{\LaTeX:                A Document Preparation System}.   Addison Wesley, Massachusetts,                     2nd Edition,   1994.          \end{thebibliography}          \end{document},V
+lamport94,v
+\documentclass{article}\usepackage{natbib}\begin{document}\citeauthor{lamport94}\citet{lamport94}\begin{thebibliography}{9}\bibitem[Lamport (1994)]{lamport94}Leslie Lamport,   \emph{\LaTeX:    A Document Preparation System}.   Addison Wesley, Massachusetts,      2nd Edition,   1994.\end{thebibliography}\end{document},v
+imap <C-space> <Plug>IMAP_JumpForward,V
+',v
+t,v
+[authoryear]{,v
+numbers,v
+\usepackage{gensymb},V
+\usepackage{amsmath},V
+authoryear,v
+ARTICLE,v
+l,v
+Line of Sight Integration,v
+*.acn*.acr*.alg*.aux*.bbl*.blg*.dvi*.fdb_latexmk*.glg*.glo*.gls*.idx*.ilg*.ind*.ist*.lof*.log*.lot*.maf*.mtc*.mtc0*.nav*.nlo*.out*.pdfsync*.ps*.snm*.synctex.gz*.toc*.vrb*.xdy*.tdo,V
+ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAoozqIiJSYB2iDY5jZ7upubav2CLftCkowfZUdyW+/JCNxvW8+HS/CQqEMnk+V94ULgnaV1E83EyB+A3mUrYp+2TQWYIsuDdlVLlIedNZgMH/gOt9EM+4eWJsOgcOICLDLFdAhOUbibEIFbvU8Md7hhebwk0e8w8+7w9Ehq6roRMMkE/Iv9IMj7/icJxGlbNVptJPJJrbft+qpjE28D0I1pUFjHOHexy+iJPeC1dgOBhJvnH20uravl2th0oomi0VReupv055vjVhhZ3Bu3wuOid2E8bZxBqLI8onrAGiYiynOp5llc+AQU+ZkvRji9l4kdsm9MItiUnXMpcfSgn7SQ== calvin@jiba.lmsal.com,V
+pbcopy < ~/.ssh/id_rsa.pub,v
+independently,v
+git remote add origin ssh://git@bitbucket.org/calvin909090/intelpaper.git,v
+*.acn*.acr*.alg*.aux*.bbl*.blg*.dvi*.fdb_latexmk*.glg*.glo*.gls*.idx*.ilg*.ind*.ist*.lof*.log*.lot*.maf*.mtc*.mtc0*.nav*.nlo*.out*.pdfsync*.ps*.snm*.synctex.gz*.toc*.vrb*.xdy*.tdo,v
+\begin{equation}    I = \int_l A_b n_e n_h G(T, n_e) dl\end{equation},V
+\begin{equation}    I(\nu) = \frac{h\nu}{4\pi} \int_l \phi_\nu n_e n_h G(T, n_e) dl\end{equation},V
+$n_e$, $n_h$, and $\vec{u}$,V
+electron ,v
+those,v
+\nocite{*},V
+g:Tex_MultipleCompileFormats,v
+\cite{MartinezSykora1} found that synthesized total intensity $I$ along a line of sight $l$ is given by:\begin{equation}    I = \int_l A_b n_e n_h G(T, n_e) dl\end{equation}where $A_b$, $n_e$, $n_h$ and $G(T, n_e)$ represent the abundance of the emitting element,the electron and the hydrogen densities, and the contribution function, respectively.Similarly, \cite{Hansteen1} found a similar relationship for intensity at a particular frequency:\begin{equation}    I(\nu) = \frac{h\nu}{4\pi} \int_l \phi_\nu n_e n_h G(T, n_e) dl\end{equation}where $n_e$, $n_h$, and $G(T, n_e)$ are defined similarly. $\nu$ represents the emission frequency,$h\nu$ represents the transition energy,and $\phi_\nu$ represents the Doppler broadening computed by:\begin{equation}    \phi_\nu = \frac{1}{\pi^{1/2} \Delta\nu_D}    \exp{\left[-\left(\frac{\Delta\nu-\nu \vec{u} \cdot \vec{n} / c}{\Delta\nu_D}\right)^2\right]}\end{equation},V
+what?},v
+(,v
+wavelength,v
+Hansteen1,v
+*,v
+M,v
+B,v

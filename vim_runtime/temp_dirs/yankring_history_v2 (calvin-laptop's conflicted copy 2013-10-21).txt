@@ -1,0 +1,100 @@
+255.255.255.255,v
+        classification,V
+    def set_led_state(button_num, state):        if ,V
+https://github.com/robotpy/robotpy.git,v
+channel,v
+pair,v
+        for i, state_id in enumerate(BUTTON_TABLE):            self.update_state(state_id,                              self.j.GetRawButton(i + 1))            # button index is offset by 1 due to wpilib 1-indexing,V
+REGISTER_CLK,v
+from wpilib import DriverStationEnhancedIO as dsio,V
+, 'button3',                'button4', 'button5', 'button6',                'button7', 'button8', 'button9'},v
+        Initializes the joystick with some USB port.,V
+        self.io,V
+, DriverStationEnhancedIO,v
+        self.j = Joystick(port),V
+        self.update_state('y_axis', self.j.GetY()),V
+        self.update_state('x_axis', self.j.GetX()),V
+,V
+Joystick,v
+Attack3Joystick,v
+trigger,v
+g.getAngle()),v
+angle,v
+        self.g = Gyro(channel),V
+    Has double attribute angle for total angle rotated,V
+ analog gyroscope,v
+an,v
+ate('angle,v
+Gyro,v
+),v
+quadrature encoder,v
+dist,v
+distance,v
+        self.update_state('direction', self.e.GetDirection()),V
+        self.update_state('stopped', self.e.GetStopped()),V
+        self.update_state('rate', self.e.GetRate()),V
+        self.update_state('degrees', dist / pulse_dist * cpr / 360.0),V
+        dist = self.e.GetDistance(),V
+        self.e = Encoder(modnum, channel_a, channel_b, reverse, enctype)        self.cpr = cpr        self.pulse_dist = pulse_dist,V
+        Initializes the encoder with two channels,        distance per pulse (default 1), no reversing by default,        on module number 1 by default, 128 CPR, and with 4x counting by default,V
+channel_a, channel_b, pulse_dist=1,                 reverse=False, modnum=1, cpr=128,                 enctype=CounterBase.k4x,v
+s for distance, degrees (degrees rotated),    rate (distance/second);    boolean attributes stopped and direction ,v
+    Has double attributes for distance, degrees (degrees rotated),    rate (distance/second);,V
+CounterBase,v
+ ,v
+Encoder,,v
+Encoder,v
+GetDistance,v
+Distance,v
+self.e.GetDistance,v
+()),v
+self.e.GetDistance()),v
+GetDistance())        self.update_state,v
+self.e.,v
+pulses_per_rev,v
+        self.update_state('distance', self.e.GetDistance()),V
+;,v
+        self.update_state('keypad_pos', self.j.GetRawAxis(6)),V
+        self.update_state('trigger_pos', self.j.GetZ());,V
+        self.update_state('r_y_axis', self.j.GetRawAxis(5)),V
+        self.update_state('r_x_axis', self.j.GetRawAxis(4)),V
+        self.update_state('l_y_axis', self.j.GetY()),V
+pulse_dist, ,v
+Encoder.,v
+None,v
+        for i, state_id in enumerate(BUTTON_TABLE):            self.update_state(state_id,                              self.j.GetRawButton(i + 1))            # button index is offset by 1 due to wpilib 1-indexing,V
+        for i, state_id in enumerate(BUTTON_TABLE):            self.update_state(state_id,                              self.j.GetRawButton(i + 1))            # button index is offset by 1 due to wpilib 1-indexing        self.update_state('l_x_axis', self.j.GetX())        self.update_state('l_y_axis', self.j.GetY())        self.update_state('r_x_axis', self.j.GetRawAxis(4))        self.update_state('r_y_axis', self.j.GetRawAxis(5))        self.update_state('trigger_pos', self.j.GetZ());        self.update_state('keypad_pos', self.j.GetRawAxis(6)),V
+port,v
+joystick with some USB port.,v
+d,v
+e,v
+t,v
+a,v
+o,v
+r,v
+_,v
+    Has boolean attributes for buttons: a/b/x/y/back/start_button,    l/r_shoulder    Attributes l/r_x/y_axis for thumbstick positions    trigger_pos and keypad_pos for trigger and keypad position,V
+    Has boolean attributes for buttons: a/b/x/y/back/start_button,    l/r_shoulder    Attributes l/r_x/y_axis for thumbstick positions    trigger_pos and keypad_pos for trigger and keypad position    ''',V
+BUTTON_TABLE = ['a_button', 'b_button', 'x_button', 'y_button',                'l_shoulder', 'r_shoulder', 'back_button',                'start_button'],V
+Joystic,v
+.,v
+the Xbox Controller,v
+XboxJoystick,v
+Attack3,v
+    and double x_axis, y_axis for joystick position,V
+,,v
+trigger, button2-9,v
+X(),v
+        self.update_state('l_x_axis', j.getX())        self.update_state('l_y_axis', j.getY()),V
+                'button7', 'button8', 'button9'],V
+button6,v
+button5,v
+button3,v
+',v
+button2,v
+from wpilib import Joystickfrom grt.core import SensorBUTTON_TABLE = ['trigger', 'button2', 'button3',                'button4', 'button5', 'button6',                'button7', 'button8', 'button9']class Attack3Joystick(Sensor):    '''    Sensor wrapper for the Attack 3 Joystick.    Has boolean attributes for buttons: trigger, button2-9    and double x_axis, y_axis for joystick position    '''    def __init__(self, port):        '''        Initializes the joystick with some USB port.        '''        super().__init__()        j = Joystick(port)    def poll(self):        for i, state_id in enumerate(BUTTON_TABLE):            self.update_state(state_id,                              j.getRawButton(i + 1))            # button index is offset by 1 due to wpilib 1-indexing        self.update_state('x_axis', j.getX())        self.update_state('y_axis', j.getY()),V
+    def __setattr__(self, name, datum):        self.update_state(name, datum),V
+    def __setattr__(self, name, datum):        self.update_state(name, datum),V
+import wpilib,V
+(,v
+Enum,v
