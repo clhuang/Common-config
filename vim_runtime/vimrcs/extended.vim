@@ -10,8 +10,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark
 
-colorscheme peaksea
-
 " Set font according to system
 if has("mac") || has("macunix")
     set gfn=Menlo:h15
