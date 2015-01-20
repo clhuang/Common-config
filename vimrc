@@ -16,6 +16,13 @@ endtry
 nnoremap <C-j> <C-w>j
 vnoremap <C-j> <C-w>j
 
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+
 filetype plugin on
 set shellslash
 set grepprg=grep\ -nH\ $*
