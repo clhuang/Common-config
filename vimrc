@@ -17,9 +17,7 @@ endtry
 nnoremap <C-j> <C-w>j
 vnoremap <C-j> <C-w>j
 
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
+set t_Co=256
 let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
