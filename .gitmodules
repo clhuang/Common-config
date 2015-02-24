@@ -4,3 +4,39 @@
 [submodule "vim_runtime/sources_forked/ctrlp.vim"]
 	path = vim_runtime/sources_forked/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim_runtime/sources_forked/jedi-vim"]
+	path = vim_runtime/sources_forked/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
+[submodule "vim_runtime/sources_forked/nerdcommenter"]
+	path = vim_runtime/sources_forked/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "vim_runtime/sources_forked/nerdtree"]
+	path = vim_runtime/sources_forked/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim_runtime/sources_forked/python-mode"]
+	path = vim_runtime/sources_forked/python-mode
+	url = https://github.com/klen/python-mode.git
+[submodule "vim_runtime/sources_forked/vim-airline"]
+	path = vim_runtime/sources_forked/vim-airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "vim_runtime/sources_forked/vim-colors-solarized"]
+	path = vim_runtime/sources_forked/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "vim_runtime/sources_forked/vim-easymotion"]
+	path = vim_runtime/sources_forked/vim-easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "vim_runtime/sources_forked/vim-expand-region"]
+	path = vim_runtime/sources_forked/vim-expand-region
+	url = https://github.com/terryma/vim-expand-region.git
+[submodule "vim_runtime/sources_forked/vim-fugitive"]
+	path = vim_runtime/sources_forked/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim_runtime/sources_forked/vim-latex"]
+	path = vim_runtime/sources_forked/vim-latex
+	url = https://github.com/lervag/vim-latex.git
+[submodule "vim_runtime/sources_forked/vim-sneak"]
+	path = vim_runtime/sources_forked/vim-sneak
+	url = https://github.com/justinmk/vim-sneak.git
+[submodule "vim_runtime/sources_forked/vim-vinegar"]
+	path = vim_runtime/sources_forked/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar.git
