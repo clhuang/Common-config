@@ -40,3 +40,6 @@
 [submodule "vim_runtime/sources_forked/vim-vinegar"]
 	path = vim_runtime/sources_forked/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar.git
+[submodule "vim_runtime/sources_forked/fzf"]
+	path = vim_runtime/sources_forked/fzf
+	url = https://github.com/junegunn/fzf.git
