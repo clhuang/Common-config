@@ -26,4 +26,4 @@ filetype indent on
 let g:tex_flavor='latex'
 let g:Tex_MultipleCompileFormats='dvi, pdf'
 set mouse=a
-set rtp+=~/.fzf
+set rtp+=/usr/local/Cellar/fzf/0.10.2
