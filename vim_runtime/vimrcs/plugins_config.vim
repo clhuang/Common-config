@@ -1,16 +1,31 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Important: 
-"       This requries that you install https://github.com/amix/vimrc !
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 """"""""""""""""""""""""""""""
-" => Load pathogen paths
+" => vim-plug
 """"""""""""""""""""""""""""""
-call pathogen#infect('~/.vim_runtime/sources_forked')
-call pathogen#infect('~/.vim_runtime/sources_non_forked')
-call pathogen#helptags()
+call plug#begin('~/.vim_runtime/plugged')
+
+Plug 'mileszs/ack.vim'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf'
+Plug 'davidhalter/jedi-vim'
+Plug 'yegappan/mru'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'klen/python-mode'
+Plug 'kovisoft/slimv'
+Plug 'vim-airline/vim-airline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'easymotion-vim-easymotion'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-fugitive'
+Plug 'lervag/vimtex'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/surround.vim'
+Plug 'tpope/vim-vinegar'
+
+call plug#end()
+
 
 """"""""""""""""""""""""""""""
 " => bufExplorer plugin
@@ -76,7 +91,23 @@ snor <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
 " => Vim grep
 """"""""""""""""""""""""""""""
 let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
-set grepprg=/bin/grep\ -nH
+set grepprg=grep\ -nH\ $*
+
+
+""""""""""""""""""""""""""""""
+" => Vimtex
+""""""""""""""""""""""""""""""
+let g:tex_flavor='latex'
+let g:Tex_MultipleCompileFormats='dvi, pdf'
+let g:vimtex_latexmk_options="-pdflatex='pdflatex --shell-escape' -pdf"
+
+
+""""""""""""""""""""""""""""""
+" => slimv
+""""""""""""""""""""""""""""""
+let g:slimv_preferred = 'mit'
+let g:slimv_disable_lisp=1
+let g:scheme_builtin_swank=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

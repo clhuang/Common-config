@@ -14,6 +14,7 @@ source ~/.vim_runtime/my_configs.vim
 catch
 endtry
 
+
 set t_Co=256
 let g:solarized_termcolors=256
 set background=dark
@@ -23,12 +24,5 @@ filetype plugin on
 set shellslash
 set grepprg=grep\ -nH\ $*
 filetype indent on
-let g:tex_flavor='latex'
-let g:Tex_MultipleCompileFormats='dvi, pdf'
-let g:vimtex_latexmk_options="-pdflatex='pdflatex --shell-escape' -pdf"
 set mouse=a
 set rtp+=/usr/local/Cellar/fzf/0.10.2
-
-let g:slimv_preferred = 'mit'
-let g:slimv_disable_lisp=1
-let g:scheme_builtin_swank=1
