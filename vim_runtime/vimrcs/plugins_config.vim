@@ -7,6 +7,7 @@ Plug 'mileszs/ack.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/ctrlp.vim'
 Plug 'junegunn/fzf'
+Plug 'eagletmt/ghcmod-vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'tomasr/molokai'
 Plug 'yegappan/mru'
@@ -22,7 +23,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
+Plug 'shougo/vimproc.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 
@@ -125,6 +128,14 @@ map <leader>nf :NERDTreeFind<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:multi_cursor_next_key="\<C-s>"
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ghcmod-vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+map <silent> tw :GhcModTypeInsert<CR>
+map <silent> ts :GhcModSplitFunCase<CR>
+map <silent> tq :GhcModType<CR>
+map <silent> te :GhcModTypeClear<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => surround.vim config
