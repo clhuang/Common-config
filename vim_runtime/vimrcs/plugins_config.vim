@@ -3,6 +3,7 @@
 """"""""""""""""""""""""""""""
 call plug#begin('~/.vim_runtime/plugged')
 
+Plug 'fatih/vim-go'
 Plug 'mileszs/ack.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/ctrlp.vim'
