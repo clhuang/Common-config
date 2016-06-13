@@ -1,4 +1,9 @@
 # source this before "source $ZSH/oh-my-zsh.sh"
+USING_ZSH=false
+if [[ "$SHELL" == *"/zsh" ]]; then USING_ZSH=true; fi
+USING_MAC=false 
+if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
+
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 alias mountafs="sshfs calvinh@athena.dialup.mit.edu:/afs /afs"
@@ -13,13 +18,6 @@ alias dev='ssh -Y -p 478 calvin@10.0.2.239'
 alias devt='ssh -Y -p 478 calvin@10.0.2.239 -t "tmux -CC attach"'
 
 export FZF_TMUX=0
-USING_ZSH=false
-if [[ "$SHELL" == *"/zsh" ]]; then USING_ZSH=true; fi
-USING_MAC=false 
-if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
-ZSH_THEME="agnoster"
-plugins=(git brew common-aliases dirhistory git-extras osx pip sudo z)
-source $ZSH/oh-my-zsh.sh
 
 if $USING_MAC; then
     if $USING_ZSH; then
@@ -32,6 +30,9 @@ fi
 
 if $USING_ZSH; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    ZSH_THEME="agnoster"
+    plugins=(git brew common-aliases dirhistory git-extras osx pip sudo z)
+    source $ZSH/oh-my-zsh.sh
 else
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
     export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
@@ -67,20 +68,22 @@ fo() {
   fi
 }
 
-# vf - fuzzy open with vim from anywhere
-# ex: vf word1 word2 ... (even part of a file name)
-# zsh autoload function
-vf() {
-  local files
+if $USING_ZSH; then
+    # vf - fuzzy open with vim from anywhere
+    # ex: vf word1 word2 ... (even part of a file name)
+    # zsh autoload function
+    vf() {
+      local files
 
-  files=(${(f)"$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1 -m)"})
+      files=(${(f)"$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1 -m)"})
 
-  if [[ -n $files ]]
-  then
-     vim -- $files
-     print -l $files[1]
-  fi
-}
+      if [[ -n $files ]]
+      then
+         vim -- $files
+         print -l $files[1]
+      fi
+    }
+fi
 
 # fd - cd to selected directory
 fd() {
@@ -108,24 +111,27 @@ fdr() {
   local DIR=$(get_parent_dirs $(realpath "${1:-$(pwd)}") | fzf-tmux --tac)
   cd "$DIR"
 }
-# cf - fuzzy cd from anywhere
-# ex: cf word1 word2 ... (even part of a file name)
-# zsh autoload function
-cf() {
-  local file
 
-  file="$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1)"
+if $USING_ZSH; then
+    # cf - fuzzy cd from anywhere
+    # ex: cf word1 word2 ... (even part of a file name)
+    # zsh autoload function
+    cf() {
+      local file
 
-  if [[ -n $file ]]
-  then
-     if [[ -d $file ]]
-     then
-        cd -- $file
-     else
-        cd -- ${file:h}
-     fi
-  fi
-}
+      file="$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1)"
+
+      if [[ -n $file ]]
+      then
+         if [[ -d $file ]]
+         then
+            cd -- $file
+         else
+            cd -- ${file:h}
+         fi
+      fi
+    }
+fi
 
 # cdf - cd into the directory of the selected file
 cdf() {
