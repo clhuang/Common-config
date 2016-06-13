@@ -13,7 +13,10 @@ try
 source ~/.vim_runtime/my_configs.vim
 catch
 endtry
-
+if has('nvim')
+  " Hack to get C-h working in NeoVim
+  imap <BS> <C-W>h
+endif
 
 set t_Co=256
 let g:solarized_termcolors=256

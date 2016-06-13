@@ -19,6 +19,7 @@ USING_MAC=false
 if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
 ZSH_THEME="agnoster"
 plugins=(git brew common-aliases dirhistory git-extras osx pip sudo z)
+source $ZSH/oh-my-zsh.sh
 
 if $USING_MAC; then
     if $USING_ZSH; then
