@@ -6,8 +6,11 @@ alias sshathena="ssh -o GSSAPIKeyExchange=no -X calvinh@athena.dialup.mit.edu"
 alias mosh='mosh --ssh="ssh -o GSSAPITrustDns=no"'
 alias nv='nvim'
 alias cserv='ssh -X calvinserv.mit.edu'
-PATH="/Users/calvin/.cabal/bin:/usr/local/bin:/usr/local/share/python:$PATH"
+PATH="/usr/local/bin:/usr/local/share/python:$PATH"
 alias fuck='$(thefuck $(fc -ln -1))'
 alias FUCK='fuck'
+alias dev='ssh -Y -p 478 calvin@10.0.2.239'
+alias devt='ssh -Y -p 478 -t calvin@10.0.2.239 "tmux -CC attach"'
 
 export FZF_TMUX=0
+alias lsb_release='echo'

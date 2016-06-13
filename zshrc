@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/calvin/.oh-my-zsh
+export ZSH=/Users/calvin.huang/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="robbierussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,13 +49,14 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew common-aliases dirhistory git-extras osx pip python sudo z)
+plugins=(git)
 
 # User configuration
 
-export PATH="/Users/calvin/.opam/system/bin:/Users/calvin/.cabal/bin:/usr/local/bin:/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/usr/local/Cellar/fzf/0.10.2/bin"
+export PATH="/Users/calvin.huang/.opam/system/bin:/Users/calvin.huang/.cabal/bin:/usr/local/bin:/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/usr/local/Cellar/fzf/0.10.2/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+source $HOME/Common-config/env.sh
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -75,8 +76,10 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 source ~/.profile
+export ANS_ROOT=$HOME/ans
+source $HOME/ans/etc/zshrc
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    source /Users/calvin/.iterm2_shell_integration.zsh
+    source /Users/calvin.huang/.iterm2_shell_integration.zsh
 fi
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh

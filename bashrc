@@ -8,4 +8,9 @@ HISTFILESIZE=10000
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source /Users/calvin/.iterm2_shell_integration.bash
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 source .profile
+export $ANS_ROOT=$HOME/ans
+source $ANS_ROOT/etc/shrc
