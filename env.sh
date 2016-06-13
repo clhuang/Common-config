@@ -1,6 +1,46 @@
 # source this before "source $ZSH/oh-my-zsh.sh"
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+alias mountafs="sshfs calvinh@athena.dialup.mit.edu:/afs /afs"
+alias unmountafs="umount /afs"
+alias sshathena="ssh -o GSSAPIKeyExchange=no -X calvinh@athena.dialup.mit.edu"
+alias mosh='mosh --ssh="ssh -o GSSAPITrustDns=no"'
+alias nv='nvim'
+alias cserv='ssh -X calvinserv.mit.edu'
+alias fuck='$(thefuck $(fc -ln -1))'
+alias FUCK='fuck'
+alias dev='ssh -Y -p 478 calvin@10.0.2.239'
+alias devt='ssh -Y -p 478 calvin@10.0.2.239 -t "tmux -CC attach"'
+
+export FZF_TMUX=0
+USING_ZSH=false
+if [[ "$SHELL" == *"/zsh" ]]; then USING_ZSH=true; fi
+USING_MAC=false 
+if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
 ZSH_THEME="agnoster"
 plugins=(git brew common-aliases dirhistory git-extras osx pip python sudo z)
+
+if $USING_MAC; then
+    if $USING_ZSH; then
+        source /Users/calvin.huang/.iterm2_shell_integration.zsh
+    else
+        source /Users/calvin.huang/.iterm2_shell_integration.bash
+    fi
+    alias lsb_release='echo'
+fi
+
+if $USING_ZSH; then
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+else
+    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+    export CLICOLOR=1
+    export LSCOLORS=ExFxBxDxCxegedabagacad
+    alias ls='ls -GFh'
+    HISTSIZE=5000
+    HISTFILESIZE=10000
+fi
+
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)

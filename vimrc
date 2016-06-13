@@ -26,3 +26,6 @@ set grepprg=grep\ -nH\ $*
 filetype indent on
 set mouse=a
 set rtp+=/usr/local/Cellar/fzf/0.10.2
+
+let g:python_host_prog='/usr/bin/python'
+let g:python3_host_prog='/usr/bin/python3'
