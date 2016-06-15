@@ -14,6 +14,10 @@ source ~/.vim_runtime/my_configs.vim
 catch
 endtry
 
+if has("nvim") && has("unix")
+  set termguicolors
+endif
+
 set t_Co=256
 let g:solarized_termcolors=256
 set background=dark
