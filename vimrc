@@ -9,11 +9,6 @@ source ~/.vim_runtime/vimrcs/filetypes.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
-try
-source ~/.vim_runtime/my_configs.vim
-catch
-endtry
-
 if has("nvim") && has("unix") && (system("uname") !~ "Darwin")
   set termguicolors
 endif
@@ -29,3 +24,20 @@ set grepprg=grep\ -nH\ $*
 filetype indent on
 set mouse=a
 set rtp+=/usr/local/Cellar/fzf/0.10.2
+
+let g:terminal_color_0  = '#626262'
+let g:terminal_color_1  = '#ff8373'
+let g:terminal_color_2  = '#b4fb73'
+let g:terminal_color_3  = '#fffdc3'
+let g:terminal_color_4  = '#a5d5fe'
+let g:terminal_color_5  = '#ff90fe'
+let g:terminal_color_6  = '#d1d1fe'
+let g:terminal_color_7  = '#f1f1f1'
+let g:terminal_color_8  = '#8f8f8f'
+let g:terminal_color_9  = '#ffc4be'
+let g:terminal_color_10 = '#d6fcba'
+let g:terminal_color_11 = '#fffed5'
+let g:terminal_color_12 = '#c2e3ff'
+let g:terminal_color_13 = '#ffb2fe'
+let g:terminal_color_14 = '#e6e7fe'
+let g:terminal_color_15 = '#ffffff'
