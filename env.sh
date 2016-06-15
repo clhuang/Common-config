@@ -31,7 +31,7 @@ fi
 if $USING_ZSH; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     ZSH_THEME="agnoster"
-    plugins=(git brew common-aliases dirhistory git-extras osx pip sudo z)
+    plugins=(git brew dirhistory git-extras osx pip sudo z)
     source $ZSH/oh-my-zsh.sh
 else
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
