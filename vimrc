@@ -13,10 +13,6 @@ try
 source ~/.vim_runtime/my_configs.vim
 catch
 endtry
-if has('nvim')
-  " Hack to get C-h working in NeoVim
-  imap <BS> <C-W>h
-endif
 
 set t_Co=256
 let g:solarized_termcolors=256
@@ -29,6 +25,3 @@ set grepprg=grep\ -nH\ $*
 filetype indent on
 set mouse=a
 set rtp+=/usr/local/Cellar/fzf/0.10.2
-
-let g:python_host_prog='/usr/bin/python'
-let g:python3_host_prog='/usr/bin/python3'

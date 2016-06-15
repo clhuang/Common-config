@@ -51,7 +51,7 @@ fe() {
   IFS='
 '
   local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
   unset IFS
 }
 
@@ -64,12 +64,12 @@ fo() {
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-nvim} "$file"
   fi
 }
 
 if $USING_ZSH; then
-    # vf - fuzzy open with vim from anywhere
+    # vf - fuzzy open with nvim from anywhere
     # ex: vf word1 word2 ... (even part of a file name)
     # zsh autoload function
     vf() {
@@ -79,7 +79,7 @@ if $USING_ZSH; then
 
       if [[ -n $files ]]
       then
-         vim -- $files
+         nvim -- $files
          print -l $files[1]
       fi
     }
