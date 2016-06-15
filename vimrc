@@ -14,7 +14,7 @@ source ~/.vim_runtime/my_configs.vim
 catch
 endtry
 
-if has("nvim") && has("unix")
+if has("nvim") && has("unix") && (system("uname") !~ "Darwin")
   set termguicolors
 endif
 
