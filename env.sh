@@ -21,18 +21,18 @@ export FZF_TMUX=0
 
 if $USING_MAC; then
     if $USING_ZSH; then
-        source /Users/calvin.huang/.iterm2_shell_integration.zsh
+        source $HOME/.iterm2_shell_integration.zsh
     else
-        source /Users/calvin.huang/.iterm2_shell_integration.bash
+        source $HOME/.iterm2_shell_integration.bash
     fi
     alias lsb_release='echo'
 fi
 
 if $USING_ZSH; then
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     ZSH_THEME="agnoster"
     plugins=(git brew dirhistory git-extras osx pip sudo z)
     source $ZSH/oh-my-zsh.sh
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 else
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
     export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
