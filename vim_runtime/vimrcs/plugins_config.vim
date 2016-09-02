@@ -16,7 +16,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'klen/python-mode'
-Plug 'kovisoft/slimv', { 'do': 'sed -i '''' \"/let g:slimv_osx = 1/ d\" ftplugin/slimv.vim' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
