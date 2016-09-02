@@ -9,7 +9,7 @@ source ~/.vim_runtime/vimrcs/filetypes.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
-if has("nvim") && has("unix") && (system("uname") !~ "Darwin")
+if has("nvim") && has("unix")
   set termguicolors
 endif
 
