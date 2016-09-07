@@ -17,6 +17,12 @@ alias FUCK='fuck'
 alias dev='ssh -Y -p 478 calvin@10.0.2.239'
 alias devt='ssh -Y -p 478 calvin@10.0.2.239 -t "tmux -CC attach"'
 
+# server-specific
+alias dropboxmit='HOME=/home/calvin dropbox'
+alias dropboxpers='HOME=/home/calvin/.dropbox-pers dropbox'
+
+alias ipyserv='nohup jupyter notebook --config=~/.ipython/profile_nbserver/ipython_notebook_config.py > ipynb.log 2>&1 &'
+
 export FZF_TMUX=0
 
 if $USING_MAC; then
