@@ -8,14 +8,12 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 alias mountafs="sshfs calvinh@athena.dialup.mit.edu:/afs /afs"
 alias unmountafs="umount /afs"
-alias sshathena="ssh -o GSSAPIKeyExchange=no -X calvinh@athena.dialup.mit.edu"
+alias sshathena="ssh -K -X calvinh@athena.dialup.mit.edu"
 alias mosh='mosh --ssh="ssh -o GSSAPITrustDns=no"'
 alias nv='nvim'
-alias cserv='ssh -X calvinserv.mit.edu'
+alias cserv='ssh -X calvinserv.mit.edu -t "tmux -CC attach"'
 alias fuck='$(thefuck $(fc -ln -1))'
 alias FUCK='fuck'
-alias dev='ssh -Y -p 478 calvin@10.0.2.239'
-alias devt='ssh -Y -p 478 calvin@10.0.2.239 -t "tmux -CC attach"'
 
 # server-specific
 alias dropboxmit='HOME=/home/calvin dropbox'

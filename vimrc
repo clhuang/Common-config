@@ -41,3 +41,6 @@ let g:terminal_color_12 = '#c2e3ff'
 let g:terminal_color_13 = '#ffb2fe'
 let g:terminal_color_14 = '#e6e7fe'
 let g:terminal_color_15 = '#ffffff'
+
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
