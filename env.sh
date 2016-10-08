@@ -11,6 +11,7 @@ alias unmountafs="umount /afs"
 alias sshathena="ssh -K -X calvinh@athena.dialup.mit.edu"
 alias mosh='mosh --ssh="ssh -o GSSAPITrustDns=no"'
 alias nv='nvim'
+alias brewski='brew update && brew upgrade --all && brew cleanup; brew doctor'
 alias cserv='ssh -X calvinserv.mit.edu -t "tmux -CC attach"'
 alias fuck='$(thefuck $(fc -ln -1))'
 alias FUCK='fuck'
