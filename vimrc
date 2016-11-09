@@ -10,12 +10,9 @@ source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
 set termguicolors
-highlight Comment cterm=italic
-
-set t_Co=256
-let g:solarized_termcolors=256
 set background=dark
 colorscheme molokai
+highlight Comment cterm=italic gui=italic
 
 filetype plugin on
 set shellslash

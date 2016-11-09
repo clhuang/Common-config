@@ -1,2 +1,0 @@
-set guifont=Ubuntu_Mono_derivative_Powerlin:h12:cANSI
-colorscheme molokai
