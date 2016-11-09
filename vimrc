@@ -9,9 +9,8 @@ source ~/.vim_runtime/vimrcs/filetypes.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
-if has("nvim") && has("unix")
-  set termguicolors
-endif
+set termguicolors
+highlight Comment cterm=italic
 
 set t_Co=256
 let g:solarized_termcolors=256
