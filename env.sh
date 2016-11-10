@@ -205,5 +205,5 @@ fstash() {
 # venv configuration
 export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
-source /usr/local/opt/autoenv/activate.sh
+source /usr/local/bin/activate.sh
 
