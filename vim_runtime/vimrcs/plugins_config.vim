@@ -105,7 +105,7 @@ set grepprg=grep\ -nH\ $*
 """"""""""""""""""""""""""""""
 let g:tex_flavor='latex'
 let g:Tex_MultipleCompileFormats='dvi, pdf'
-let g:vimtex_latexmk_options="-xelatex -pdf"
+let g:vimtex_latexmk_options="-xelatex -shell-escape -pdf"
 
 
 """"""""""""""""""""""""""""""

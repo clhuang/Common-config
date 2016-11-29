@@ -199,6 +199,10 @@ fstash() {
   done
 }
 
+awsssh() {
+    ssh -i $HOME/.ssh/6869-calvin-ray-charlotte.pem ubuntu@$1 -t "tmux -CC attach"
+}
+
 # OPAM configuration
 . /Users/calvin/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
