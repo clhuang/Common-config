@@ -200,7 +200,7 @@ fstash() {
 }
 
 awsssh() {
-    ssh -i $HOME/.ssh/6869-calvin-ray-charlotte.pem ubuntu@$1 -t "tmux -CC attach"
+    ssh -X -i $HOME/.ssh/6869-calvin-ray-charlotte.pem ubuntu@$1 -t "tmux -CC attach"
 }
 
 # OPAM configuration
@@ -208,6 +208,4 @@ awsssh() {
 
 # venv configuration
 export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-source /usr/local/bin/activate.sh
 
