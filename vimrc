@@ -9,7 +9,9 @@ source ~/.vim_runtime/vimrcs/filetypes.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
-set termguicolors
+if has("nvim")
+    set termguicolors
+endif
 set background=dark
 colorscheme molokai
 highlight Comment cterm=italic gui=italic
