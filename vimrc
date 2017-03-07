@@ -1,5 +1,6 @@
 set runtimepath+=~/.vim_runtime
-if has("gui_running")
+if has("nvim")
+    set icm=split
 endif
 let g:airline_powerline_fonts=1
 
