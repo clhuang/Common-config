@@ -6,15 +6,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
 
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-alias mountafs="sshfs calvinh@athena.dialup.mit.edu:/afs /afs"
-alias unmountafs="umount /afs"
-alias sshathena="ssh -K -X calvinh@athena.dialup.mit.edu"
-alias mosh='mosh --ssh="ssh -o GSSAPITrustDns=no"'
 alias nv='nvim'
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 alias brewski='brew update && brew upgrade --all && brew cleanup; brew doctor'
 alias cserv='ssh -X calvinserv.mit.edu -t "tmux -CC attach"'
 alias fuck='$(thefuck $(fc -ln -1))'
 alias FUCK='fuck'
+
+source ~/Common-config/private.sh
 
 # server-specific
 alias dropboxmit='HOME=/home/calvin dropbox'
@@ -197,10 +197,6 @@ fstash() {
       git stash show -p $sha
     fi
   done
-}
-
-awsssh() {
-    ssh -X -i $HOME/.ssh/6869-calvin-ray-charlotte.pem ubuntu@$1 -t "tmux -CC attach"
 }
 
 # OPAM configuration

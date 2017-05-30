@@ -4,3 +4,4 @@ vim_runtime/my_configs.vim
 vim_runtime/plugged
 vim_runtime/.netrwhist
 .DS_Store
+private.sh
