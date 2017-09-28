@@ -1,4 +1,6 @@
 # source this before "source $ZSH/oh-my-zsh.sh"
+source ~/Common-config/private.sh
+
 USING_ZSH=false
 if [[ "$SHELL" == *"/zsh" ]]; then USING_ZSH=true; fi
 USING_MAC=false 
@@ -8,13 +10,12 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 alias nv='nvim'
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 alias brewski='brew update && brew upgrade --all && brew cleanup; brew doctor'
 alias cserv='ssh -X calvinserv.mit.edu -t "tmux -CC attach"'
 alias fuck='$(thefuck $(fc -ln -1))'
 alias FUCK='fuck'
-
-source ~/Common-config/private.sh
 
 # server-specific
 alias dropboxmit='HOME=/home/calvin dropbox'
