@@ -13,13 +13,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 alias brewski='brew update && brew upgrade --all && brew cleanup; brew doctor'
-alias cserv='ssh -X calvinserv.mit.edu -t "tmux -CC attach"'
-alias fuck='$(thefuck $(fc -ln -1))'
-alias FUCK='fuck'
-
-# server-specific
-alias dropboxmit='HOME=/home/calvin dropbox'
-alias dropboxpers='HOME=/home/calvin/.dropbox-pers dropbox'
 
 alias ipyserv='nohup jupyter notebook --config=~/.ipython/profile_nbserver/ipython_notebook_config.py > ipynb.log 2>&1 &'
 
