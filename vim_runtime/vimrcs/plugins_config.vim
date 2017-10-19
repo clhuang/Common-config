@@ -15,7 +15,7 @@ Plug 'yegappan/mru'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'klen/python-mode'
+Plug 'python-mode/python-mode', {'branch': 'develop'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
