@@ -8,6 +8,7 @@ Plug 'mileszs/ack.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/ctrlp.vim'
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'tomasr/molokai'
@@ -33,6 +34,18 @@ Plug 'embear/vim-localvimrc'
 
 call plug#end()
 
+""""""""""""""""""""""""""""""
+" => fzf plugin
+""""""""""""""""""""""""""""""
+nmap ; :Buffers<CR>
+nmap <Leader>a :Ag<CR>
+nmap <Leader>t :GFiles<CR>
+nmap <Leader>tt :Files<CR>
+
+""""""""""""""""""""""""""""""
+" => ack plugin
+""""""""""""""""""""""""""""""
+let g:ackprg = 'ag --vimgrep'
 
 """"""""""""""""""""""""""""""
 " => bufExplorer plugin
