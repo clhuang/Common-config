@@ -3,7 +3,6 @@
 """"""""""""""""""""""""""""""
 call plug#begin('~/.vim_runtime/plugged')
 
-Plug 'fatih/vim-go'
 Plug 'mileszs/ack.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/ctrlp.vim'
@@ -15,12 +14,10 @@ Plug 'tomasr/molokai'
 Plug 'yegappan/mru'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'python-mode/python-mode', {'branch': 'develop'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
-Plug 'kchmck/vim-coffee-script'
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
@@ -32,6 +29,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'embear/vim-localvimrc'
+Plug 'vim-syntastic/syntastic'
+Plug 'mtscout6/syntastic-local-eslint.vim'
 
 call plug#end()
 
@@ -223,7 +222,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
