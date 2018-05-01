@@ -6,27 +6,6 @@ if [[ "$SHELL" == *"/zsh" ]]; then USING_ZSH=true; fi
 USING_MAC=false 
 if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
 
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-alias nv='nvim'
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
-
-alias ipyserv='nohup jupyter notebook --config=~/.ipython/profile_nbserver/ipython_notebook_config.py > ipynb.log 2>&1 &'
-
-export FZF_TMUX=0
-
-if $USING_MAC; then
-    if $USING_ZSH; then
-        source $HOME/.iterm2_shell_integration.zsh
-    else
-        source $HOME/.iterm2_shell_integration.bash
-    fi
-    alias lsb_release='echo'
-fi
-
 if $USING_ZSH; then
     ZSH_THEME="agnoster"
     plugins=(git brew dirhistory git-extras osx pip sudo z)
@@ -41,6 +20,30 @@ else
     HISTSIZE=5000
     HISTFILESIZE=10000
 fi
+
+export FZF_TMUX=0
+export EDITOR=nvim
+
+if $USING_MAC; then
+    if $USING_ZSH; then
+        source $HOME/.iterm2_shell_integration.zsh
+    else
+        source $HOME/.iterm2_shell_integration.bash
+    fi
+    alias lsb_release='echo'
+fi
+
+source ~/Common-config/aliases.sh
+
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+alias nv='nvim'
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
+
+alias ipyserv='nohup jupyter notebook --config=~/.ipython/profile_nbserver/ipython_notebook_config.py > ipynb.log 2>&1 &'
 
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
@@ -164,38 +167,14 @@ fcs() {
   commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
-# fstash - easier way to deal with stashes
-# type fstash to get a list of your stashes
-# enter shows you the contents of the stash
-# ctrl-d shows a diff of the stash against your current HEAD
-# ctrl-b checks the stash out as a branch, for easier merging
-fstash() {
-  local out q k sha
-  while out=$(
-    git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
-    fzf --ansi --no-sort --query="$q" --print-query \
-        --expect=ctrl-d,ctrl-b);
-  do
-    mapfile -t out <<< "$out"
-    q="${out[0]}"
-    k="${out[1]}"
-    sha="${out[-1]}"
-    sha="${sha%% *}"
-    [[ -z "$sha" ]] && continue
-    if [[ "$k" == 'ctrl-d' ]]; then
-      git diff $sha
-    elif [[ "$k" == 'ctrl-b' ]]; then
-      git stash branch "stash-$sha" $sha
-      break;
-    else
-      git stash show -p $sha
-    fi
-  done
-}
-
-# OPAM configuration
-. /Users/calvin/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # venv configuration
 export WORKON_HOME=~/.virtualenvs
 
+_direnv_hook() {
+  eval "$(direnv export zsh)";
+}
+typeset -ag precmd_functions;
+if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
+  precmd_functions+=_direnv_hook;
+fi
