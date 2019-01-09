@@ -45,6 +45,7 @@ function! JavaScriptFold()
     setl foldtext=FoldText()
 endfunction
 
+au FileType typescript set tabstop=2|set shiftwidth=2
 
 """"""""""""""""""""""""""""""
 " => CoffeeScript section

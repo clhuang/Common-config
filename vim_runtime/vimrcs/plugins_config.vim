@@ -15,6 +15,7 @@ Plug 'yegappan/mru'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'python-mode/python-mode', {'branch': 'develop'}
+Plug 'Quramy/tsuquyomi',
 Plug 'leafgarland/typescript-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -210,9 +211,14 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
+let g:pymode_options_max_line_length = 120
+let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_length}
+let g:pymode_options_colorcolumn = 1
+
 " Don't autofold code
 let g:pymode_folding = 0
 let g:jedi#force_py_version = 3
+let g:pymode_python = 'python3'
 
 let g:localvimrc_persistent = 1
 
@@ -227,6 +233,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
 "let g:syntastic_error_symbol = '❌'
 "let g:syntastic_style_error_symbol = '⁉️'
