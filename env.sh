@@ -39,10 +39,25 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 alias nv='nvim'
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
 
+# Install zsh-async if it’s not present
+if [[ ! -a ~/.zsh-async ]]; then
+  git clone git@github.com:mafredri/zsh-async.git ~/.zsh-async
+fi
+source ~/.zsh-async/async.zsh
+
+export NVM_DIR="$HOME/.nvm"
+function load_nvm() {
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+}
+
+# Initialize worker
+async_start_worker nvm_worker -n
+async_register_callback nvm_worker load_nvm
+async_job nvm_worker sleep 0.1
+
+alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
 alias ipyserv='nohup jupyter notebook --config=~/.ipython/profile_nbserver/ipython_notebook_config.py > ipynb.log 2>&1 &'
 
 

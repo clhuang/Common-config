@@ -46,6 +46,8 @@ function! JavaScriptFold()
 endfunction
 
 au FileType typescript set tabstop=2|set shiftwidth=2
+au FileType typescript setlocal foldmethod=syntax
+
 
 """"""""""""""""""""""""""""""
 " => CoffeeScript section

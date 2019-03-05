@@ -15,7 +15,6 @@ Plug 'yegappan/mru'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'python-mode/python-mode', {'branch': 'develop'}
-Plug 'Quramy/tsuquyomi',
 Plug 'leafgarland/typescript-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -33,6 +32,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'embear/vim-localvimrc'
 Plug 'vim-syntastic/syntastic'
 Plug 'mtscout6/syntastic-local-eslint.vim'
+Plug 'alessioalex/syntastic-local-tslint.vim'
 
 call plug#end()
 
@@ -233,6 +233,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_typescript_checkers = ['tslint']
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
