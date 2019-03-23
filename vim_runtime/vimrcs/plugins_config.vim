@@ -15,7 +15,10 @@ Plug 'yegappan/mru'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'python-mode/python-mode', {'branch': 'develop'}
-Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/denite.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
@@ -143,6 +146,17 @@ let g:scheme_builtin_swank=1
 """"""""""""""""""""""""""""""
 let g:jedi#force_py_version = 3
 
+""""""""""""""""""""""""""""""
+" => nvim-typescript
+""""""""""""""""""""""""""""""
+map td :TSDoc<cr>
+map tt :TSType<cr>
+map tj :TSDefPreview<cr>
+
+""""""""""""""""""""""""""""""
+" => deoplete
+""""""""""""""""""""""""""""""
+let g:deoplete#enable_at_startup = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
