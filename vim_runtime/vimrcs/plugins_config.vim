@@ -11,10 +11,8 @@ Plug 'tomasr/molokai'
 Plug 'yegappan/mru'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-"Plug 'HerringtonDarkholme/yats.vim'
-"Plug 'neoclide/vim-jsx-improve'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'neoclide/vim-jsx-improve'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
@@ -180,30 +178,6 @@ map <leader>o :BufExplorer<cr>
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
 map <leader>m :MRU<CR>
-
-
-""""""""""""""""""""""""""""""
-" => YankRing
-""""""""""""""""""""""""""""""
-if has("win16") || has("win32")
-    " Don't do anything
-else
-    let g:yankring_history_dir = '~/.vim_runtime/temp_dirs/'
-endif
-
-
-""""""""""""""""""""""""""""""
-" => Peepopen
-""""""""""""""""""""""""""""""
-map <leader>j :PeepOpen<cr>
-
-
-
-""""""""""""""""""""""""""""""
-" => ZenCoding
-""""""""""""""""""""""""""""""
-" Enable all functions in all modes
-let g:user_zen_mode='a'
 
 
 """"""""""""""""""""""""""""""
