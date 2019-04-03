@@ -1,6 +1,6 @@
-VIM configuration for programming in Python and Typescript.
-Symlink vim_runtime to ~/.vim_runtime, vimrc to ~/.vimrc.
+NVIM configuration for programming in Python and Typescript. Uses Coc-vim for language completion features.
+Symlink vim_runtime to ~/.vim_runtime, vimrc to ~/.config/nvim/init.vim, coc-settings.json to ~/.config/nvim/coc-settings.json.
 
-Other steps include installing jedi (vim_runtime/sources_forked/jedi_vim/jedi), ctags (from the internet), and your powerline font of choice from github.com/Lokaltog/powerline-fonts (the current one specified is Ubuntu Mono Powerline).
+Other steps include installing jedi (clone the repo to your home folder), installing coc-typescript/coc-python/coc-X...
 
-As for figuring out keybindings... good luck! Most of the plugins follow default keybindings, but caveat emptor.
+As for figuring out keybindings... good luck!
