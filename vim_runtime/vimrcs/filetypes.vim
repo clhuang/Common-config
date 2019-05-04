@@ -47,6 +47,8 @@ endfunction
 
 au FileType typescript set tabstop=2|set shiftwidth=2
 au FileType typescript setlocal foldmethod=syntax
+au FileType typescript.tsx set tabstop=2|set shiftwidth=2
+au FileType typescript.tsx setlocal foldmethod=syntax
 
 
 """"""""""""""""""""""""""""""
