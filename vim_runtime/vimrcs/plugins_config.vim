@@ -28,6 +28,8 @@ Plug 'tpope/vim-vinegar'
 Plug 'hashivim/vim-terraform'
 Plug 'embear/vim-localvimrc'
 Plug 'vim-syntastic/syntastic'
+Plug 'dense-analysis/ale'
+Plug 'embear/vim-localvimrc'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'alessioalex/syntastic-local-tslint.vim'
@@ -240,9 +242,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_typescript_checkers = ['tslint']
+let g:syntastic_typescript_checkers = ['eslint']
 
-let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+let g:syntastic_mode_map = { 'passive_filetypes': ['python', 'typescript'] }
 
 "let g:syntastic_error_symbol = '❌'
 "let g:syntastic_style_error_symbol = '⁉️'
@@ -253,3 +255,14 @@ let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 "highlight link SyntasticWarningSign SignColumn
 "highlight link SyntasticStyleErrorSign SignColumn
 "highlight link SyntasticStyleWarningSign SignColumn
+
+" Ale setup
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\}
+
+nnoremap <leader>] :ALENext<CR>
+nnoremap <leader>[ :ALEPrevious<CR>
+
+let g:localvimrc_persistent = 1
