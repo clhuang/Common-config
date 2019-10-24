@@ -21,7 +21,7 @@ filetype plugin on
 set shellslash
 set grepprg=grep\ -nH\ $*
 filetype indent on
-set mouse=a
+set mouse=n
 set rtp+=/usr/local/Cellar/fzf/0.10.2
 
 let g:terminal_color_0  = '#626262'

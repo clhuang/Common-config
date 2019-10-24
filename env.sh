@@ -8,9 +8,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
 
 if $USING_ZSH; then
     ZSH_THEME="agnoster"
-    plugins=(git brew dirhistory git-extras osx pip sudo z)
+    plugins=(git brew dirhistory git-extras osx pip sudo z vi-mode)
     source $ZSH/oh-my-zsh.sh
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    setopt hist_ignore_space
 else
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
     export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "

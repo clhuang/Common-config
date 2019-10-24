@@ -33,6 +33,7 @@ Plug 'embear/vim-localvimrc'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'alessioalex/syntastic-local-tslint.vim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
