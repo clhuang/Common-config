@@ -27,15 +27,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'hashivim/vim-terraform'
 Plug 'embear/vim-localvimrc'
-Plug 'vim-syntastic/syntastic'
-Plug 'dense-analysis/ale'
-Plug 'embear/vim-localvimrc'
 Plug 'rhysd/git-messenger.vim'
-Plug 'mtscout6/syntastic-local-eslint.vim'
-Plug 'alessioalex/syntastic-local-tslint.vim'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -49,8 +43,8 @@ let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_
 " => coc plugin
 """"""""""""""""""""""""""""""
 " if hidden is not set, TextEdit might fail.
+" plugins: coc-tsserver, coc-prettier, coc-eslint, coc-json, coc-python
 set hidden
-set foldmethod=manual
 
 " Better display for messages
 set cmdheight=2
@@ -129,12 +123,21 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-g> <Plug>(coc-range-select)
+xmap <silent> <C-g> <Plug>(coc-range-select)
+
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` for fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
 
 " Using CocList
 " Show all diagnostics
@@ -153,6 +156,9 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 """"""""""""""""""""""""""""""
 " => fzf plugin
@@ -230,40 +236,5 @@ map <silent> te :GhcModTypeClear<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
-
-
-" Syntastic setup
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_typescript_checkers = ['eslint']
-
-let g:syntastic_mode_map = { 'passive_filetypes': ['python', 'typescript'] }
-
-"let g:syntastic_error_symbol = '❌'
-"let g:syntastic_style_error_symbol = '⁉️'
-"let g:syntastic_warning_symbol = '⚠️'
-"let g:syntastic_style_warning_symbol = '💩'
-
-"highlight link SyntasticErrorSign SignColumn
-"highlight link SyntasticWarningSign SignColumn
-"highlight link SyntasticStyleErrorSign SignColumn
-"highlight link SyntasticStyleWarningSign SignColumn
-
-" Ale setup
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\}
-
-nnoremap <leader>] :ALENext<CR>
-nnoremap <leader>[ :ALEPrevious<CR>
 
 let g:localvimrc_persistent = 1
