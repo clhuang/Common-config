@@ -28,10 +28,16 @@ Plug 'tpope/vim-vinegar'
 Plug 'hashivim/vim-terraform'
 Plug 'embear/vim-localvimrc'
 Plug 'rhysd/git-messenger.vim'
+Plug 'fatih/vim-go'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+""""""""""""""""""""""""""""""
+" => terraform plugin
+""""""""""""""""""""""""""""""
+let g:terraform_fmt_on_save=1
 
 """"""""""""""""""""""""""""""
 " => airline plugin

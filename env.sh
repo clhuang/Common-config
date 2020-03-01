@@ -8,7 +8,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
 
 if $USING_ZSH; then
     ZSH_THEME="agnoster"
-    plugins=(git brew dirhistory git-extras osx pip sudo z vi-mode)
+    plugins=(git kubectl brew dirhistory git-extras osx pip sudo z vi-mode)
     source $ZSH/oh-my-zsh.sh
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     setopt hist_ignore_space
@@ -194,3 +194,6 @@ typeset -ag precmd_functions;
 if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
   precmd_functions+=_direnv_hook;
 fi
+
+alias tfp='terraform plan'
+alias tfa='terraform apply'
