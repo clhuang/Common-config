@@ -9,10 +9,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'tomasr/molokai'
 Plug 'yegappan/mru'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'neoclide/vim-jsx-improve'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
@@ -33,6 +32,8 @@ Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+let g:NERDSpaceDelims = 1
 
 """"""""""""""""""""""""""""""
 " => terraform plugin
