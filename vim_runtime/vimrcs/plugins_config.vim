@@ -22,6 +22,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
 Plug 'shougo/vimproc.vim'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'justinmk/vim-sneak'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
@@ -241,3 +242,13 @@ vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
 let g:localvimrc_persistent = 1
+
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+  " ensure_installed = "all",      -- one of "all", "language", or a list of languages
+  " highlight = {
+    " enable = true,              -- false will disable the whole extension
+    " disable = { "c", "rust" },  -- list of language that will be disabled
+  " },
+" }
+" EOF

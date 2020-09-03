@@ -8,7 +8,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
 
 if $USING_ZSH; then
     ZSH_THEME="agnoster"
-    plugins=(git kubectl brew dirhistory git-extras osx pip sudo z vi-mode)
+    plugins=(aws git kubectl brew dirhistory git-extras osx pip sudo z vi-mode)
     source $ZSH/oh-my-zsh.sh
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     setopt hist_ignore_space
