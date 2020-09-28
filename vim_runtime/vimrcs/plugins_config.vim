@@ -6,6 +6,7 @@ call plug#begin('~/.vim_runtime/plugged')
 Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-peekaboo'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'tomasr/molokai'
 Plug 'yegappan/mru'

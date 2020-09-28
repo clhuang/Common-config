@@ -8,6 +8,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then USING_MAC=true; fi
 
 if $USING_ZSH; then
     ZSH_THEME="agnoster"
+    export KEYTIMEOUT=2
     plugins=(aws git kubectl brew dirhistory git-extras osx pip sudo z vi-mode)
     source $ZSH/oh-my-zsh.sh
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
