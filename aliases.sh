@@ -46,6 +46,15 @@ alias unexport='unset'
 
 alias whereami=display_info
 
+alias nv='nvim'
+
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tf='terraform'
+
+alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
+alias ipyserv='nohup jupyter notebook --config=~/.ipython/profile_nbserver/ipython_notebook_config.py > ipynb.log 2>&1 &'
+
 #alias rm='rm -i'
 #alias cp='cp -i'
 #alias mv='mv -i'

@@ -39,7 +39,6 @@ source ~/Common-config/aliases.sh
 
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-alias nv='nvim'
 
 # Install zsh-async if it’s not present
 if [[ ! -a ~/.zsh-async ]]; then
@@ -47,10 +46,7 @@ if [[ ! -a ~/.zsh-async ]]; then
 fi
 source ~/.zsh-async/async.zsh
 
-eval "`fnm env --multi`"
-
-alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
-alias ipyserv='nohup jupyter notebook --config=~/.ipython/profile_nbserver/ipython_notebook_config.py > ipynb.log 2>&1 &'
+eval "`fnm env`"
 
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
@@ -185,6 +181,3 @@ typeset -ag precmd_functions;
 if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
   precmd_functions+=_direnv_hook;
 fi
-
-alias tfp='terraform plan'
-alias tfa='terraform apply'

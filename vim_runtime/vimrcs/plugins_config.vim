@@ -4,7 +4,7 @@
 call plug#begin('~/.vim_runtime/plugged')
 
 Plug 'jlanzarotta/bufexplorer'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'eagletmt/ghcmod-vim'
@@ -31,7 +31,6 @@ Plug 'tpope/vim-vinegar'
 Plug 'hashivim/vim-terraform'
 Plug 'embear/vim-localvimrc'
 Plug 'rhysd/git-messenger.vim'
-Plug 'fatih/vim-go'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
