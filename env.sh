@@ -46,7 +46,7 @@ if [[ ! -a ~/.zsh-async ]]; then
 fi
 source ~/.zsh-async/async.zsh
 
-eval "`fnm env`"
+eval "`fnm env --use-on-cd`"
 
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
