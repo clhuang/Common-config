@@ -12,18 +12,18 @@ Plug 'tomasr/molokai'
 Plug 'yegappan/mru'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'yuezk/vim-js'
+" Plug 'maxmellon/vim-jsx-pretty'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
+Plug 'phaazon/hop.nvim'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
-Plug 'lervag/vimtex'
 Plug 'shougo/vimproc.vim'
-" Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'justinmk/vim-sneak'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
@@ -33,6 +33,14 @@ Plug 'embear/vim-localvimrc'
 Plug 'rhysd/git-messenger.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+function! UpdateRemotePlugins(...)
+    " Needed to refresh runtime files
+    let &rtp=&rtp
+    UpdateRemotePlugins
+endfunction
+
+Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
 call plug#end()
 
@@ -290,14 +298,50 @@ map <leader>nf :NERDTreeFind<cr>
 vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => localvimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:localvimrc_persistent = 1
 
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-  " ensure_installed = "all",      -- one of "all", "language", or a list of languages
-  " highlight = {
-    " enable = true,              -- false will disable the whole extension
-    " disable = { "c", "rust" },  -- list of language that will be disabled
-  " },
-" }
-" EOF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => treesitter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",      -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+  indent = {
+    enable = true
+  },
+}
+EOF
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Wilder
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call wilder#set_option('renderer', wilder#wildmenu_renderer(
+      \ wilder#wildmenu_airline_theme({
+      \   'highlights': {},
+      \   'highlighter': wilder#basic_highlighter(),
+      \   'separator': ' · ',
+      \ })))
+call wilder#setup({'modes': [':', '/', '?']})
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Hop
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua <<EOF
+require'hop'.setup()
+EOF
+map <leader><leader>w :HopWordAC<cr>
+map <leader><leader>b :HopWordBC<cr>
+map <leader><leader>/ :HopChar1<cr>
+map <leader><leader>m :HopWordMW<cr>
+
