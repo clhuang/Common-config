@@ -35,6 +35,11 @@ Plug 'embear/vim-localvimrc'
 Plug 'rhysd/git-messenger.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'clhuang/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
 
 function! UpdateRemotePlugins(...)
     " Needed to refresh runtime files
@@ -311,6 +316,7 @@ let g:localvimrc_persistent = 1
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",      -- one of "all", "language", or a list of languages
+  ignore_install = { "phpdoc" },
   highlight = {
     enable = true,              -- false will disable the whole extension
   },
