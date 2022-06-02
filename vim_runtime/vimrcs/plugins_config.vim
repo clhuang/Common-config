@@ -33,9 +33,10 @@ Plug 'tpope/vim-vinegar'
 Plug 'hashivim/vim-terraform'
 Plug 'embear/vim-localvimrc'
 Plug 'rhysd/git-messenger.vim'
+Plug 'luukvbaal/stabilize.nvim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'clhuang/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
@@ -329,6 +330,9 @@ EOF
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
+lua << EOF
+require("stabilize").setup()
+EOF
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Wilder
