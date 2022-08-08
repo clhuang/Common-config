@@ -45,7 +45,9 @@ if [[ ! -a ~/.zsh-async ]]; then
 fi
 source ~/.zsh-async/async.zsh
 
-eval "`fnm env --use-on-cd`"
+if command -v direnv; then
+    eval "`fnm env --use-on-cd`"
+fi
 
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
@@ -174,7 +176,9 @@ fcs() {
 export WORKON_HOME=~/.virtualenvs
 
 _direnv_hook() {
-  eval "$(direnv export zsh)";
+  if command -v direnv; then
+      eval "$(direnv export zsh)";
+  fi
 }
 typeset -ag precmd_functions;
 if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
