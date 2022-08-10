@@ -1,22 +1,25 @@
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap =
-        fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
-    vim.cmd [[packadd packer.nvim]]
+	packer_bootstrap =
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+	vim.cmd([[packadd packer.nvim]])
 end
 
-require("packer").startup(
-    function(use)
-        -- My plugins here
-          use "wbthomason/packer.nvim"
+require("packer").startup(function(use)
+	-- My plugins here
+	use("wbthomason/packer.nvim")
 
-
-        use {"junegunn/fzf", run = function()
-                vim.fn["fzf#install"](0)
-            end}
-        use {"junegunn/fzf.vim", config = function()
-            vim.cmd([[
+	use({
+		"junegunn/fzf",
+		run = function()
+			vim.fn["fzf#install"](0)
+		end,
+	})
+	use({
+		"junegunn/fzf.vim",
+		config = function()
+			vim.cmd([[
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
@@ -33,108 +36,120 @@ nmap <Leader>t :GFiles<CR>
 nmap <Leader>tt :Files<CR>
 
             ]])
-
-        end}
-        use "junegunn/vim-peekaboo"
-        use "eagletmt/ghcmod-vim"
-        use "tomasr/molokai"
-        use "lbrayner/vim-rzip"
-        use {"yegappan/mru", config = function()
-            vim.cmd([[
+		end,
+	})
+	use("junegunn/vim-peekaboo")
+	use("eagletmt/ghcmod-vim")
+	use("tomasr/molokai")
+	use("lbrayner/vim-rzip")
+	use({
+		"yegappan/mru",
+		config = function()
+			vim.cmd([[
 let MRU_Max_Entries = 400
 map <leader>m :MRU<CR>
 
             ]])
-        end}
-        use "preservim/nerdcommenter"
-        use {"vim-airline/vim-airline", config = function()
-            vim.cmd([[
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-
-]])
-        end}
-        use "vim-airline/vim-airline-themes"
-        use "altercation/vim-colors-solarized"
-        use {"phaazon/hop.nvim", config = function()
-            require'hop'.setup()
-            vim.cmd(
-            [[
+		end,
+	})
+	use("preservim/nerdcommenter")
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		config = function()
+			require("lualine").setup({ options = {theme = "moonfly"}})
+		end,
+	})
+	use("vim-airline/vim-airline-themes")
+	use("altercation/vim-colors-solarized")
+	use({
+		"phaazon/hop.nvim",
+		config = function()
+			require("hop").setup()
+			vim.cmd([[
 map <leader><leader>w :HopWordAC<cr>
 map <leader><leader>b :HopWordBC<cr>
 map <leader><leader>/ :HopChar1<cr>
 map <leader><leader>m :HopWordMW<cr>
 
-            ]]
-            )
-        end}
-        use "terryma/vim-expand-region"
-        use "tpope/vim-fugitive"
-        use "shougo/vimproc.vim"
-        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function()
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",      -- one of "all", "language", or a list of languages
-  ignore_install = { "phpdoc" },
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-  indent = {
-    enable = true
-  },
-}
-vim.cmd([[
+            ]])
+		end,
+	})
+	use("terryma/vim-expand-region")
+	use("tpope/vim-fugitive")
+	use("shougo/vimproc.vim")
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = "all", -- one of "all", "language", or a list of languages
+				ignore_install = { "phpdoc" },
+				highlight = {
+					enable = true, -- false will disable the whole extension
+				},
+				indent = {
+					enable = true,
+				},
+			})
+			vim.cmd([[
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 ]])
-        end}
-        use "justinmk/vim-sneak"
-        use "airblade/vim-gitgutter"
-        use {"tpope/vim-surround", config = function()
-            vim.cmd([[
-vmap Si S(i_<esc>f)
-au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
-            ]])
-        end}
-        use "tpope/vim-vinegar"
-        use "rhysd/git-messenger.vim"
-        use {"luukvbaal/stabilize.nvim", config = function() require('stabilize').setup() end }
-        use {"neoclide/coc.nvim", branch = "release"}
-        use {"neoclide/coc-tsserver", run = "yarn install --frozen-lockfile"}
-        use {"neoclide/coc-eslint", run = "yarn install --frozen-lockfile"}
-        use {"neoclide/coc-json", run = "yarn install --frozen-lockfile"}
-        use {"neoclide/coc-prettier", run = "yarn install --frozen-lockfile"}
-        use {"josa42/coc-lua", run = "yarn install --frozen-lockfile"}
-        use {"xiyaowong/coc-stylua", run = "yarn install --frozen-lockfile"}
-        use {"fannheyward/coc-rust-analyzer", run = "yarn install --frozen-lockfile"}
-        use {"fannheyward/coc-pyright", run = "yarn install --frozen-lockfile"}
-        use {
-            "gelguy/wilder.nvim",
-            config = function()
-                local wilder = require("wilder")
-                wilder.set_option(
-                    "renderer",
-                    wilder.wildmenu_renderer(
-                        -- use wilder.wildmenu_lightline_theme() if using Lightline
-                        wilder.wildmenu_airline_theme(
-                            {
-                                -- highlights can be overriden, see :h wilder#wildmenu_renderer()
-                                highlights = {default = "StatusLine"},
-                                highlighter = wilder.basic_highlighter(),
-                                separator = " · "
-                            }
-                        )
-                    )
-                )
-            end
-        }
-
-        -- Automatically set up your configuration after cloning packer.nvim
-        -- Put this at the end after all plugins
-        if packer_bootstrap then
-            require("packer").sync()
+		end,
+	})
+	use("justinmk/vim-sneak")
+	use("airblade/vim-gitgutter")
+    use({
+        "kylechui/nvim-surround",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
         end
-    end
-)
+    })
+	use("tpope/vim-vinegar")
+	use("rhysd/git-messenger.vim")
+	use({
+		"luukvbaal/stabilize.nvim",
+		config = function()
+			require("stabilize").setup()
+		end,
+	})
+	use({ "neoclide/coc.nvim", branch = "release" })
+	use({ "neoclide/coc-tsserver", run = "yarn install --frozen-lockfile" })
+	use({ "neoclide/coc-eslint", run = "yarn install --frozen-lockfile" })
+	use({ "neoclide/coc-json", run = "yarn install --frozen-lockfile" })
+	use({ "neoclide/coc-prettier", run = "yarn install --frozen-lockfile" })
+	use({ "josa42/coc-lua", run = "yarn install --frozen-lockfile" })
+	use({ "xiyaowong/coc-stylua", run = "yarn install --frozen-lockfile" })
+	use({ "fannheyward/coc-rust-analyzer", run = "yarn install --frozen-lockfile" })
+	use({ "fannheyward/coc-pyright", run = "yarn install --frozen-lockfile" })
+	use({
+		"gelguy/wilder.nvim",
+		config = function()
+			local wilder = require("wilder")
+			wilder.set_option(
+				"renderer",
+				wilder.wildmenu_renderer(
+					-- use wilder.wildmenu_lightline_theme() if using Lightline
+					wilder.wildmenu_airline_theme({
+						-- highlights can be overriden, see :h wilder#wildmenu_renderer()
+						highlights = { default = "StatusLine" },
+						highlighter = wilder.basic_highlighter(),
+						separator = " · ",
+					})
+				)
+			)
+		end,
+	})
+
+	-- Automatically set up your configuration after cloning packer.nvim
+	-- Put this at the end after all plugins
+	if packer_bootstrap then
+		require("packer").sync()
+	end
+end)
 
 vim.cmd([[
   augroup packer_user_config
@@ -294,4 +309,23 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " coc-prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+]])
+
+vim.cmd([[
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
 ]])

@@ -4,7 +4,6 @@ let g:airline_powerline_fonts=1
 let g:multi_cursor_next_key='<C-n>'
 runtime basic.vim
 runtime filetypes.vim
-" source ~/.vim_runtime/vimrcs/plugins_config.vim
 lua require('plugins')
 runtime extended.vim
 

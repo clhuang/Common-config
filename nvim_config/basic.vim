@@ -215,7 +215,7 @@ map <C-l> <C-W>l
 map <leader>bd :Bclose<cr>
 
 " Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
+map <leader>ba :1,$ bd!<cr>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
