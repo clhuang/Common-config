@@ -1,14 +1,13 @@
-set runtimepath+=~/.vim_runtime
-if has("nvim")
-    set icm=split
-endif
+set icm=split
 let g:airline_powerline_fonts=1
 
 let g:multi_cursor_next_key='<C-n>'
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
+runtime basic.vim
+runtime filetypes.vim
+" source ~/.vim_runtime/vimrcs/plugins_config.vim
+lua require('plugins')
+runtime extended.vim
+
 
 if has("nvim")
     set termguicolors
