@@ -1,7 +1,4 @@
-vim_runtime/temp_dirs/undodir*
-vim_runtime/temp_dirs/yankring_history_v2.txt
-vim_runtime/my_configs.vim
-vim_runtime/plugged
-vim_runtime/.netrwhist
+nvim_config/undodir
+nvim_config/plugin/packer_compiled.lua
 .DS_Store
 private.sh

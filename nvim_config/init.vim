@@ -8,10 +8,7 @@ runtime filetypes.vim
 lua require('plugins')
 runtime extended.vim
 
-
-if has("nvim")
-    set termguicolors
-endif
+set termguicolors
 set background=dark
 colorscheme molokai
 highlight Comment cterm=italic gui=italic
@@ -21,7 +18,6 @@ set shellslash
 set grepprg=grep\ -nH\ $*
 filetype indent on
 set mouse=n
-set rtp+=/usr/local/Cellar/fzf/0.10.2
 
 let g:terminal_color_0  = '#626262'
 let g:terminal_color_1  = '#ff8373'
