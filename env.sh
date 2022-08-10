@@ -45,7 +45,7 @@ if [[ ! -a ~/.zsh-async ]]; then
 fi
 source ~/.zsh-async/async.zsh
 
-if command -v direnv; then
+if command -v fnm > /dev/null; then
     eval "`fnm env --use-on-cd`"
 fi
 
@@ -176,7 +176,7 @@ fcs() {
 export WORKON_HOME=~/.virtualenvs
 
 _direnv_hook() {
-  if command -v direnv; then
+  if command -v direnv > /dev/null; then
       eval "$(direnv export zsh)";
   fi
 }
