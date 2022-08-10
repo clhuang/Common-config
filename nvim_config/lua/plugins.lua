@@ -57,10 +57,11 @@ map <leader>m :MRU<CR>
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 		config = function()
-			require("lualine").setup({ options = {theme = "moonfly"}})
+		require("lualine").setup({
+			options = { theme = "moonfly" },
+		})
 		end,
 	})
-	use("vim-airline/vim-airline-themes")
 	use("altercation/vim-colors-solarized")
 	use({
 		"phaazon/hop.nvim",
