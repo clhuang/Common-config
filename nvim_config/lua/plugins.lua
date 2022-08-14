@@ -57,9 +57,9 @@ map <leader>m :MRU<CR>
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 		config = function()
-		require("lualine").setup({
-			options = { theme = "moonfly" },
-		})
+			require("lualine").setup({
+				options = { theme = "moonfly" },
+			})
 		end,
 	})
 	use("altercation/vim-colors-solarized")
@@ -101,14 +101,14 @@ set foldexpr=nvim_treesitter#foldexpr()
 	})
 	use("justinmk/vim-sneak")
 	use("airblade/vim-gitgutter")
-    use({
-        "kylechui/nvim-surround",
-        config = function()
-            require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
-            })
-        end
-    })
+	use({
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	})
 	use("tpope/vim-vinegar")
 	use("rhysd/git-messenger.vim")
 	use({
@@ -130,17 +130,18 @@ set foldexpr=nvim_treesitter#foldexpr()
 		"gelguy/wilder.nvim",
 		config = function()
 			local wilder = require("wilder")
+			-- Create the WilderAccent highlight by overriding the guifg attribute of Pmenu
+			-- and return the name of the highlight
+			local hl = wilder.make_hl("WilderAccent", "Pmenu", { {}, {}, { foreground = "#f4468f" } })
+
 			wilder.set_option(
 				"renderer",
-				wilder.wildmenu_renderer(
-					-- use wilder.wildmenu_lightline_theme() if using Lightline
-					wilder.wildmenu_airline_theme({
-						-- highlights can be overriden, see :h wilder#wildmenu_renderer()
-						highlights = { default = "StatusLine" },
-						highlighter = wilder.basic_highlighter(),
-						separator = " · ",
-					})
-				)
+				wilder.wildmenu_renderer({
+					highlighter = wilder.basic_highlighter(),
+					highlights = {
+						accent = hl,
+					},
+				})
 			)
 		end,
 	})
@@ -330,3 +331,6 @@ command! BD call fzf#run(fzf#wrap({
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \ }))
 ]])
+
+local wilder = require("wilder")
+wilder.setup({ modes = { ":", "/", "?" } })
