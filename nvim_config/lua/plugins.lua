@@ -9,6 +9,7 @@ end
 require("packer").startup(function(use)
 	-- My plugins here
 	use("wbthomason/packer.nvim")
+	use("jlanzarotta/bufexplorer")
 
 	use({
 		"junegunn/fzf",
