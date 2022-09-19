@@ -39,8 +39,8 @@ nmap <Leader>tt :Files<CR>
             ]])
 		end,
 	})
-	use("junegunn/vim-peekaboo")
-	use("eagletmt/ghcmod-vim")
+	--use("junegunn/vim-peekaboo")
+	--use("eagletmt/ghcmod-vim")
 	use("tomasr/molokai")
 	use("lbrayner/vim-rzip")
 	use({

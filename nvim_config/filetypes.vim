@@ -50,6 +50,7 @@ au FileType typescript set tabstop=2|set shiftwidth=2
 au FileType typescriptreact set tabstop=2|set shiftwidth=2
 " au FileType typescriptreact setlocal foldmethod=syntax
 
+au FileType terraform set tabstop=2|set shiftwidth=2
 
 """"""""""""""""""""""""""""""
 " => CoffeeScript section
