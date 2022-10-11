@@ -365,3 +365,5 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
+hi CocMenuSel ctermbg=237 guibg=#13354A

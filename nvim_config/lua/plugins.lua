@@ -60,6 +60,12 @@ map <leader>m :MRU<CR>
 		config = function()
 			require("lualine").setup({
 				options = { theme = "moonfly" },
+				sections = {
+					lualine_c = { { "filename", path = 1 } },
+				},
+				inactive_sections = {
+					lualine_c = { { "filename", path = 1 } },
+				},
 			})
 		end,
 	})
@@ -67,14 +73,24 @@ map <leader>m :MRU<CR>
 	use({
 		"phaazon/hop.nvim",
 		config = function()
-			require("hop").setup()
-			vim.cmd([[
-map <leader><leader>w :HopWordAC<cr>
-map <leader><leader>b :HopWordBC<cr>
-map <leader><leader>/ :HopChar1<cr>
-map <leader><leader>m :HopWordMW<cr>
-
-            ]])
+			local hop = require("hop")
+			hop.setup()
+			local HintDirection = require("hop.hint").HintDirection
+			vim.keymap.set("", ",,w", function()
+				hop.hint_words({ direction = HintDirection.AFTER_CURSOR })
+			end)
+			vim.keymap.set("", ",,b", function()
+				hop.hint_words({ direction = HintDirection.BEFORE_CURSOR })
+			end)
+			vim.keymap.set("", "s", function()
+				hop.hint_char2({ direction = HintDirection.AFTER_CURSOR })
+			end)
+			vim.keymap.set("", "S", function()
+				hop.hint_char2({ direction = HintDirection.BEFORE_CURSOR })
+			end)
+			vim.keymap.set("", ",,m", function()
+				hop.hint_words({ multi_windows = true })
+			end)
 		end,
 	})
 	use("terryma/vim-expand-region")
@@ -100,7 +116,6 @@ set foldexpr=nvim_treesitter#foldexpr()
 ]])
 		end,
 	})
-	use("justinmk/vim-sneak")
 	use("airblade/vim-gitgutter")
 	use({
 		"kylechui/nvim-surround",
@@ -312,6 +327,8 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " coc-prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+autocmd ColorScheme * hi CocMenuSel ctermbg=237 guibg=#13354A
 ]])
 
 vim.cmd([[

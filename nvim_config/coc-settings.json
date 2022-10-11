@@ -13,9 +13,6 @@
     "typescriptreact"
   ],
   "rust-analyzer.procMacro.enable": true,
-"rust-analyzer.server.extraEnv": {
-    "RA_LOG": "rust_analyzer::reload=debug",
-},
   "prettier.requireConfig": true,
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
