@@ -19,6 +19,7 @@
   "python.linting.flake8Enabled": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "tsserver.maxTsServerMemory": 10240,
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
