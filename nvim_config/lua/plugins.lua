@@ -72,6 +72,7 @@ map <leader>m :MRU<CR>
 	use("altercation/vim-colors-solarized")
 	use({
 		"phaazon/hop.nvim",
+        commit = "caaccee",
 		config = function()
 			local hop = require("hop")
 			hop.setup()
