@@ -70,6 +70,7 @@ map <leader>m :MRU<CR>
 		end,
 	})
 	use("altercation/vim-colors-solarized")
+	use("github/copilot.vim")
 	use({
 		"phaazon/hop.nvim",
         commit = "caaccee",
@@ -117,7 +118,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 ]])
 		end,
 	})
-	use("airblade/vim-gitgutter")
+	use({ "airblade/vim-gitgutter", branch = "main" })
 	use({
 		"kylechui/nvim-surround",
 		config = function()
@@ -139,7 +140,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 	use({ "neoclide/coc-eslint", run = "yarn install --frozen-lockfile" })
 	use({ "neoclide/coc-json", run = "yarn install --frozen-lockfile" })
 	use({ "neoclide/coc-prettier", run = "yarn install --frozen-lockfile" })
-	use({ "josa42/coc-lua", run = "yarn install --frozen-lockfile" })
+	use({ "josa42/coc-lua", branch = "main", run = "yarn install --frozen-lockfile" })
 	use({ "xiyaowong/coc-stylua", run = "yarn install --frozen-lockfile" })
 	use({ "fannheyward/coc-rust-analyzer", run = "yarn install --frozen-lockfile" })
 	use({ "fannheyward/coc-pyright", run = "yarn install --frozen-lockfile" })
