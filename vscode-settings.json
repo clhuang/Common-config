@@ -1,0 +1,78 @@
+{
+  "window.commandCenter": 1,
+  "vim.camelCaseMotion.enable": true,
+  "vim.easymotion": true,
+  "vim.leader": ",",
+  "vim.highlightedyank.enable": true,
+  "vim.neovimPath": "/opt/homebrew/bin/nvim",
+  "vim.enableNeovim": true,
+  "vim.sneak": true,
+  "vim.statusBarColorControl": true,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.debuggingForeground": "#ffffff"
+  },
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["<C-h>"],
+      "after": ["<C-w>", "h"]
+    },
+    {
+      "before": ["<C-j>"],
+      "after": ["<C-w>", "j"]
+    },
+    {
+      "before": ["<C-k>"],
+      "after": ["<C-w>", "k"]
+    },
+    {
+      "before": ["<C-l>"],
+      "after": ["<C-w>", "l"]
+    },
+    {
+      "before": ["<C-w>", "n"],
+      "after": ["<C-w>", "s"]
+    },
+    {
+      "before": ["<leader>", "b", "d"],
+      "commands": [":bd"]
+    },
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["<leader>", "a"],
+      "commands": ["search.action.openEditor"]
+    },
+    {
+      "before": ["-"],
+      "commands": ["file-browser.open"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showHover"]
+    },
+    {
+      "before": ["]", "c"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["[", "c"],
+      "commands": ["editor.action.marker.prevInFiles"]
+    },
+    {
+      "before": ["<leader>", "g", "b"],
+      "commands": ["gitlens.toggleFileBlame"]
+    }
+  ],
+  "editor.fontSize": 11,
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "'Inconsolata Nerd Font Mono'",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
