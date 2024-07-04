@@ -67,12 +67,45 @@
     {
       "before": ["<leader>", "g", "b"],
       "commands": ["gitlens.toggleFileBlame"]
+    },
+    {
+      "before": ["g", "D"],
+      "commands": ["editor.action.peekDefinition"]
+    },
+    {
+      "before": ["g", "I"],
+      "commands": ["editor.action.peekImplementation"]
+    },
+    {
+      "before": ["g", "Y"],
+      "commands": ["editor.action.peekTypeDefinition"]
+    },
+    {
+      "before": ["g", "y"],
+      "commands": ["editor.action.goToTypeDefinition"]
+    },
+    {
+      "before": ["g", "i"],
+      "commands": ["editor.action.goToImplementation"]
+    },
+    {
+      "before": ["<leader>", "r", "n"],
+      "commands": ["editor.action.rename"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["editor.action.formatSelection"]
     }
   ],
   "editor.fontSize": 11,
   "editor.fontLigatures": true,
   "editor.fontFamily": "'Inconsolata Nerd Font Mono'",
   "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
